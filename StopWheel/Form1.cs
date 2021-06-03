@@ -17,16 +17,15 @@ namespace StopWheel
         int vyskaP;
         int velikost = 300;
         int velikost2 = 330;
-        int poziceX = 135;
-        int poziceY = 300;
-
-        double rotace;
-        double radiany;
+        double poziceX = 135;
+        double poziceY = 300;
+        double vypocet;
 
         int delkaZony = 120;
         int castNaKruhu;
 
         Random rnd = new Random();
+        Graphics g;
 
         public Form1()
         {
@@ -38,10 +37,11 @@ namespace StopWheel
             sirkaP = panel1.Width;
             vyskaP = panel1.Height;
 
-            rotace = 90;
-            radiany = rotace * (Math.PI / 180);
+            vypocet = Math.PI * Math.Pow(velikost2, 2);
 
-            Graphics g = panel1.CreateGraphics();
+            Console.WriteLine(vypocet);
+
+            g = panel1.CreateGraphics();
             g.DrawEllipse(Pens.Black, (sirkaP/2)-(velikost/2), (vyskaP / 2) - (velikost / 2), velikost, velikost);
             g.DrawEllipse(Pens.Black, (sirkaP/2)-(velikost2/2), (vyskaP / 2) - (velikost2 / 2), velikost2, velikost2);
 
@@ -54,10 +54,14 @@ namespace StopWheel
         {
             if (poziceX >= 135 && poziceX <= 300 && poziceY <= 300 && poziceY >= 135)
             {
-                poziceX= (int)(Math.Cos(radiany) * ((double)poziceX - (double)velikost2) - (double)Math.Sin(radiany) * ((double)poziceY - velikost2) + (double)velikost2);
-                
+        
+
+
+              //  poziceX = vypocet + 10;
+              //  poziceY = vypocet - 10;
+
             }
-           
+
 
             panel1.Refresh();
         }
@@ -65,7 +69,7 @@ namespace StopWheel
         private void nakresliCaru(Graphics g)
         {
 
-            g.DrawLine(Pens.Blue, sirkaP/2, vyskaP/2, poziceX, poziceY);
+            g.DrawLine(Pens.Blue, sirkaP/2, vyskaP/2, (int)poziceX, (int)poziceY);
         }
 
         private void nahodnaPoziceZony(Graphics g)
